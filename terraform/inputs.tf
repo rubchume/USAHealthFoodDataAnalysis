@@ -22,3 +22,13 @@ variable "password" {
   type = string
   default = "Passw0rd"
 }
+
+variable "dwh_iam_role_name" {
+  type = string
+  default = "dwhRole"
+}
+
+variable "s3_bucket" {
+  type = string
+  default = "udacity-nanodegree-capstone-project"
+}

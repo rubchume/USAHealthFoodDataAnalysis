@@ -9,7 +9,7 @@ module "storage" {
   aws_region  = "eu-west-3"
   aws_profile = "udacity_student"
 
-  dwh_iam_role_name = "dwhRole"
+  dwh_iam_role_name = var.dwh_iam_role_name
 
   vpc_cidr               = "10.0.0.0/16"
   redshift_subnet_cidr_1 = "10.0.1.0/24"
@@ -27,7 +27,7 @@ module "storage" {
 }
 
 resource "aws_s3_bucket" "s3" {
-  bucket = "udacity-nanodegree-capstone-project"
+  bucket = var.s3_bucket
 
   tags = {
     Name        = "Udacity Nanodegree Capstone Project Bucket"
