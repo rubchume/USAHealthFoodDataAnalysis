@@ -32,3 +32,7 @@ variable "s3_bucket" {
   type = string
   default = "udacity-nanodegree-capstone-project"
 }
+
+variable "lambda_image_uri" {
+  type = string
+}
