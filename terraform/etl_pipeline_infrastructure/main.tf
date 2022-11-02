@@ -27,14 +27,14 @@ provider "aws" {
 #}
 
 
-#resource "aws_s3_bucket" "s3" {
-#  bucket = var.s3_bucket
-#
-#  tags = {
-#    Name        = "Udacity Nanodegree Capstone Project Bucket"
-#    Environment = "Dev"
-#  }
-#}
+resource "aws_s3_bucket" "s3" {
+  bucket = var.s3_bucket
+
+  tags = {
+    Name        = "Udacity Nanodegree Capstone Project Bucket"
+    Environment = "Dev"
+  }
+}
 
 
 module "lambda_function" {
