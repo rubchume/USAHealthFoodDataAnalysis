@@ -38,7 +38,7 @@ resource "aws_s3_bucket" "s3" {
 
 
 module "lambda_function" {
-  source = "./aws_lambda"
+  source = "git::https://github.com/rubchume/TerraformAWSexamples//modules/aws_lambda?ref=de3f1b6c4a6c0f70941e872f6df44ceaeaaba184"
 
   function_name = "lambda_pivot_variables"
   lambda_image_ecr_uri = var.lambda_image_uri
@@ -46,7 +46,8 @@ module "lambda_function" {
 
 
 module "api_gateway" {
-  source = "./aws_api_gateway_for_lambda"
+  source = "git::https://github.com/rubchume/TerraformAWSexamples//modules/aws_api_gateway_for_lambda?ref=de3f1b6c4a6c0f70941e872f6df44ceaeaaba184"
 
   aws_lambda_function = module.lambda_function.aws_lambda_resource
+  endpoint_path = "pivot_variables"
 }
