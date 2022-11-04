@@ -5,6 +5,7 @@
 #output "redshift_port" {
 #  value = module.storage.redshift_cluster_port
 #}
+
 output "api_gateway_base_url" {
   value = module.api_gateway.base_url
 }
