@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "udacitydataengineeringcapstoneproject"
+version = "0.1.0"
+description = ""
+authors = ["Ruben Chulia Mena <rubchume@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+boto3 = "^1.25.2"
+python-dotenv = "^0.21.0"
+pandas = "^1.5.1"
+apache-airflow = "^2.4.2"
+
+[tool.poetry.dev-dependencies]
+jupyterlab = "^3.5.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

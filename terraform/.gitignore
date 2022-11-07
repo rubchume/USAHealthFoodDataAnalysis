@@ -1,5 +1,14 @@
 *
 !.gitignore
-!inputs.tf
-!main.tf
-!outputs.tf
+!etl_pipeline_infrastructure
+!etl_pipeline_infrastructure/inputs.tf
+!etl_pipeline_infrastructure/main.tf
+!etl_pipeline_infrastructure/outputs.tf
+!etl_pipeline_infrastructure/aws_api_gateway_for_lambda/
+!etl_pipeline_infrastructure/aws_api_gateway_for_lambda/*
+!etl_pipeline_infrastructure/aws_lambda
+!etl_pipeline_infrastructure/aws_lambda/*
+!lambda_ecr_image/
+!lambda_ecr_image/inputs.tf
+!lambda_ecr_image/main.tf
+!lambda_ecr_image/outputs.tf
