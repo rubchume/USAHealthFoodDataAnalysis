@@ -3,20 +3,29 @@ source .env
 SCRIPTS_DIRECTORY=$( cd "$(dirname "$0")" ; pwd -P )
 ROOT_DIRECTORY=$(dirname "$SCRIPTS_DIRECTORY")
 
-cd "$ROOT_DIRECTORY"/terraform/etl_pipeline_infrastructure
+cd "$ROOT_DIRECTORY"/terraform/etl_pipeline_infrastructure || exit
 REDSHIFT_HOST=$(terraform output --raw redshift_host)
 REDSHIFT_PORT=$(terraform output --raw redshift_port)
-LAMBDA_ENDPOINT=$(terraform output --raw api_gateway_base_url)
 
-cd $ROOT_DIRECTORY/airflow
+cd "$ROOT_DIRECTORY"/airflow || exit
 docker-compose -f docker-compose.yaml up --detach
 
-docker exec airflow_scheduler airflow variables set s3_bucket $s3_bucket
-docker exec airflow_scheduler airflow variables set state_and_county_data_csv_name $state_and_county_data_csv_name
-docker exec airflow_scheduler airflow variables set state_and_county_data_pivoted_csv_name pivoted_table.csv
+docker exec airflow_scheduler airflow variables set s3_bucket "$s3_bucket"
+docker exec airflow_scheduler airflow variables set state_and_county_data_csv_name "$state_and_county_data_csv_name"
 
 IAM_ROLE_ARN=arn:aws:iam::$account_id:role/$redshiftIAMRole
 docker exec airflow_scheduler airflow variables set iam_role_arn $IAM_ROLE_ARN
+
+docker exec airflow_scheduler airflow connections delete postgres_default
+docker exec airflow_scheduler airflow connections add 'postgres_default' \
+    --conn-json '{
+            "conn_type": "postgres",
+            "login": "'$login'",
+            "password": "'$password'",
+            "host": "'$REDSHIFT_HOST'",
+            "port": '$REDSHIFT_PORT',
+            "schema": "'$database_name'"
+        }'
 
 docker exec airflow_scheduler airflow connections delete redshift_default
 docker exec airflow_scheduler airflow connections add 'redshift_default' \
@@ -31,11 +40,3 @@ docker exec airflow_scheduler airflow connections add 'redshift_default' \
                 "region": "'$aws_region'"
             }
         }'
-
-docker exec airflow_scheduler airflow connections delete lambda_connection
-docker exec airflow_scheduler airflow connections add 'lambda_connection' \
-    --conn-json '{
-            "conn_type": "http",
-            "host": "'$LAMBDA_ENDPOINT'"
-        }'
-
