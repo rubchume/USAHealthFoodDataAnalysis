@@ -14,6 +14,5 @@ terraform apply -lock=false \
   -var="aws_profile=$aws_profile" \
   -var="s3_bucket=$s3_bucket" \
   -var="dwh_iam_role_name=$redshiftIAMRole" \
-  -var="lambda_image_uri=$REPOSITORY_URL" \
   -destroy \
   -auto-approve
