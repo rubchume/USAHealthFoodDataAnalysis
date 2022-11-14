@@ -11,7 +11,9 @@ cd "$ROOT_DIRECTORY"/airflow || exit
 docker-compose -f docker-compose.yaml up --detach
 
 docker exec airflow_scheduler airflow variables set s3_bucket "$s3_bucket"
-docker exec airflow_scheduler airflow variables set state_and_county_data_csv_name "$state_and_county_data_csv_name"
+docker exec airflow_scheduler airflow variables set county_state_data_csv_name "$county_state_data_csv_name"
+docker exec airflow_scheduler airflow variables set county_supplemental_data_csv_name "$county_supplemental_data_csv_name"
+docker exec airflow_scheduler airflow variables set state_supplemental_data_csv_name "$state_supplemental_data_csv_name"
 
 IAM_ROLE_ARN=arn:aws:iam::$account_id:role/$redshiftIAMRole
 docker exec airflow_scheduler airflow variables set iam_role_arn $IAM_ROLE_ARN
