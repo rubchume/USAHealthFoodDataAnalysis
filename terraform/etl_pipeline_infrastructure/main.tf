@@ -27,6 +27,15 @@ module "storage" {
 }
 
 
+resource "local_file" "output_variables" {
+  filename = "${path.module}/redshift.env"
+  content = <<EOF
+redshift_host=${module.storage.redshift_cluster_dns_name}
+redshift_port=${module.storage.redshift_cluster_port}
+EOF
+}
+
+
 resource "aws_s3_bucket" "s3" {
   bucket = var.s3_bucket
 
