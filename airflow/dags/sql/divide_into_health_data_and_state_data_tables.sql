@@ -3,5 +3,5 @@ CREATE TABLE StateHealthData AS SELECT * FROM SupplementalDataStageStagingPivote
 ALTER TABLE StateHealthData DROP COLUMN State;
 
 CREATE TABLE State AS (
-    SELECT DISTINCT State_FIPS AS FIPS, State FROM SupplementalDataStageStagingPivoted
+    SELECT DISTINCT State_FIPS AS FIPS, State, State_Population_2018 AS Population FROM SupplementalDataStageStagingPivoted
 )

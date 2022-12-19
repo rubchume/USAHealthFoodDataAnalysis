@@ -22,7 +22,6 @@ class RedshiftSQLOperatorMultipleStatements(BaseOperator):
 
     @staticmethod
     def get_sql_statements(sql_file):
-        # print(list(Path(".").glob('**/*.py')))
         with Path(sql_file).open("r") as file:
             sql_string = file.read()
             return sqlparse.split(sql_string)

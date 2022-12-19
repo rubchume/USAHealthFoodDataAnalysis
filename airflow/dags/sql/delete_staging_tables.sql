@@ -1,0 +1,4 @@
+DROP TABLE CountyStateHealthDataStaging;
+DROP TABLE SupplementalDataCountyStaging;
+DROP TABLE SupplementalDataStateStaging;
+DROP TABLE SupplementalDataStageStagingPivoted;
