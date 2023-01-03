@@ -3,7 +3,6 @@ import logging
 from typing import Any, List, Callable
 
 from airflow.models import BaseOperator
-from airflow.models.variable import Variable
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 task_logger = logging.getLogger('airflow.task')
